@@ -1,0 +1,19 @@
+﻿@model ReiRexhaj.Domain.Models.Poll
+
+<h2>@Model.Title</h2>
+<p>Date Created: @Model.DateCreated</p>
+
+<p>Option 1: @Model.Option1Text - Votes: @Model.Option1VotesCount</p>
+<p>Option 2: @Model.Option2Text - Votes: @Model.Option2VotesCount</p>
+<p>Option 3: @Model.Option3Text - Votes: @Model.Option3VotesCount</p>
+
+<form asp-action="Vote" method="post">
+    <input type="hidden" name="pollId" value="@Model.Id" />
+    <label>Vote for:</label>
+    <select name="option">
+        <option value="1">@Model.Option1Text</option>
+        <option value="2">@Model.Option2Text</option>
+        <option value="3">@Model.Option3Text</option>
+    </select>
+    <button type="submit">Vote</button>
+</form>
