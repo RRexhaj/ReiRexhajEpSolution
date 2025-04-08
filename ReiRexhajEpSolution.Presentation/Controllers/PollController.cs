@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReiRexhajEpSolution.DataAccess.Interfaces;
 using ReiRexhajEpSolution.Domain.Models;
-using Microsoft.Extensions.Logging;
 using ReiRexhajEpSolution.Presentation.Filters;
 
 namespace ReiRexhajEpSolution.Presentation.Controllers
@@ -40,11 +39,12 @@ namespace ReiRexhajEpSolution.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Poll poll, [FromServices] ILogger<PollController> logger)
+        public IActionResult Create(Poll poll)
         {
             if (ModelState.IsValid)
             {
-                _pollRepository.CreatePoll(poll, logger);
+                poll.DateCreated = DateTime.Now;
+                _pollRepository.CreatePoll(poll);
                 return RedirectToAction("Index");
             }
             return View(poll);

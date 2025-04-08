@@ -3,6 +3,7 @@ using ReiRexhajEpSolution.DataAccess.Context;
 using ReiRexhajEpSolution.DataAccess.Repositories;
 using ReiRexhajEpSolution.DataAccess.Interfaces;
 using ReiRexhajEpSolution.Presentation.Filters;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-// Configure EF Core (using In-Memory for demo purposes)
+// Configure EF Core (using SQL Server)
 builder.Services.AddDbContext<PollDbContext>(options =>
-    options.UseInMemoryDatabase("PollDb"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<PollDbContext>()
+    .AddDefaultTokenProviders();
 
 // Register repositories and filters
 builder.Services.AddScoped<IPollRepository, PollRepositoryMain>();
