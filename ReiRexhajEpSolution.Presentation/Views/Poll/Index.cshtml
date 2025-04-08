@@ -1,21 +1,33 @@
 ﻿@model IEnumerable<ReiRexhajEpSolution.Domain.Models.Poll>
-
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Polls";
+}
 <h2>All Polls</h2>
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Date Created</th>
-        <th>Actions</th>
-    </tr>
-    @foreach (var poll in Model)
-    {
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Poll</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
         <tr>
-            <td>@poll.Title</td>
-            <td>@poll.DateCreated</td>
-            <td>
-                <a href="@Url.Action("Details", "Poll", new { id = poll.Id })">View Details</a>
-            </td>
+            <th>Title</th>
+            <th>Date Created</th>
+            <th>Actions</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var poll in Model)
+        {
+            <tr>
+                <td>@poll.Title</td>
+                <td>@poll.DateCreated</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@poll.Id" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@poll.Id" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-<a href="@Url.Action("Create", "Poll")">Create New Poll</a>

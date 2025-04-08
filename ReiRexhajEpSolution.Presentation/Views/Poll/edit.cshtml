@@ -1,0 +1,30 @@
+﻿@model ReiRexhajEpSolution.Domain.Models.Poll
+
+@{
+    ViewData["Title"] = "Edit Poll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Poll</h2>
+<form method="post" asp-action="Edit" asp-controller="Poll">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Option1Text"></label>
+        <input asp-for="Option1Text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Option2Text"></label>
+        <input asp-for="Option2Text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Option3Text"></label>
+        <input asp-for="Option3Text" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

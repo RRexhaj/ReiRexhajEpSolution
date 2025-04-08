@@ -1,12 +1,28 @@
 ﻿@model ReiRexhajEpSolution.Domain.Models.Poll
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "_Layout";
+}
+<h2>@Model.Title</h2>
 
-<h2>Poll Details</h2>
-<h3>@Model.Title</h3>
+<p>
+    Option 1: @Model.Option1Text - Votes: @Model.Option1VotesCount<br />
+    Option 2: @Model.Option2Text - Votes: @Model.Option2VotesCount<br />
+    Option 3: @Model.Option3Text - Votes: @Model.Option3VotesCount
+</p>
 
-<div>
-    <p><strong>Option 1:</strong> @Model.Option1Text - Votes: @Model.Option1VotesCount</p>
-    <p><strong>Option 2:</strong> @Model.Option2Text - Votes: @Model.Option2VotesCount</p>
-    <p><strong>Option 3:</strong> @Model.Option3Text - Votes: @Model.Option3VotesCount</p>
-</div>
-
-<a asp-action="Index">Back to Polls</a>
+<hr />
+<h3>Vote Now</h3>
+<form method="post" action="/Poll/Vote">
+    <input type="hidden" name="pollId" value="@Model.Id" />
+    <label>
+        <input type="radio" name="optionNumber" value="1" required /> @Model.Option1Text
+    </label><br />
+    <label>
+        <input type="radio" name="optionNumber" value="2" required /> @Model.Option2Text
+    </label><br />
+    <label>
+        <input type="radio" name="optionNumber" value="3" required /> @Model.Option3Text
+    </label><br />
+    <button type="submit">Vote</button>
+</form>

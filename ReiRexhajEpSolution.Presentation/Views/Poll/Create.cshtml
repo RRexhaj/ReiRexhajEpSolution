@@ -1,22 +1,42 @@
 ﻿@model ReiRexhajEpSolution.Domain.Models.Poll
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create Poll";
+}
+
 <h2>Create Poll</h2>
-<form asp-action="Create" method="post">
-    <div>
-        <label>Title:</label>
-        <input asp-for="Title" />
+
+<!-- Use ASP.NET Core tag helpers: model binding will map these fields to poll properties -->
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-    <div>
-        <label>Option 1:</label>
-        <input asp-for="Option1Text" />
+
+    <div class="form-group">
+        <label asp-for="Option1Text" class="control-label"></label>
+        <input asp-for="Option1Text" class="form-control" />
+        <span asp-validation-for="Option1Text" class="text-danger"></span>
     </div>
-    <div>
-        <label>Option 2:</label>
-        <input asp-for="Option2Text" />
+
+    <div class="form-group">
+        <label asp-for="Option2Text" class="control-label"></label>
+        <input asp-for="Option2Text" class="form-control" />
+        <span asp-validation-for="Option2Text" class="text-danger"></span>
     </div>
-    <div>
-        <label>Option 3:</label>
-        <input asp-for="Option3Text" />
+
+    <div class="form-group">
+        <label asp-for="Option3Text" class="control-label"></label>
+        <input asp-for="Option3Text" class="form-control" />
+        <span asp-validation-for="Option3Text" class="text-danger"></span>
     </div>
-    <button type="submit">Create</button>
+
+    <button type="submit" class="btn btn-primary">Create Poll</button>
 </form>
+
+@section Scripts {
+    <!-- This partial enables client-side validation. Make sure you have _ValidationScriptsPartial.cshtml in Views/Shared -->
+    <partial name="_ValidationScriptsPartial" />
+}
